@@ -12,6 +12,18 @@ const Products = withRouter(
 
 class App extends Component {
   render() {
+
+
+    const [data, setData] = useState('');
+
+    useEffect(() => {
+      (async function () {
+        const { text } = await( await fetch(`/api/message`)).json();
+        setData(text);
+      })();
+    });
+
+
     return (
       <div>
         <HeaderBar />
@@ -28,6 +40,8 @@ class App extends Component {
             </Suspense>
           </main>
         </div>
+
+        <div>{data}</div>
       </div>
     );
   }
